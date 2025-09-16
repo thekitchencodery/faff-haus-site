@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>faff.haus</title>
+  <!-- Favicon & PWA -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" href="/favicon-180.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#111827" />
+
+  <!-- Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="faff.haus" />
+  <meta property="og:description" content="A creative escape." />
+  <meta property="og:url" content="https://faff.haus/" />
+  <meta property="og:image" content="/favicon-512.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="faff.haus" />
+  <meta name="twitter:description" content="A creative escape." />
+
+  <!-- Progressive Web App manifest -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="/favicon-180x180.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #fefefe;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    header {
+      padding: 3rem 0;
+      text-align: center;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .logo .faff {
+      font-family: 'Helvetica Neue', 'Arial', sans-serif;
+      font-weight: 300;
+    }
+
+    .logo .haus {
+      font-family: 'Lucida Handwriting', 'Apple Chancery', 'Dancing Script', cursive;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: normal;
+      margin-bottom: 2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-text {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .faff-definition {
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 2rem auto;
+      max-width: 600px;
+      border-left: 4px solid #1a1a1a;
+    }
+
+    .faff-definition p {
+      font-style: italic;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+
+    .faff-definition small {
+      color: #777;
+    }
+
+    .work-grid {
+      padding: 4rem 0;
+    }
+
+    .work-grid .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 4rem;
+    }
+
+    .work-item {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #1a1a1a;
+    }
+
+    .work-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(254, 254, 254, 0.85);
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    .work-item > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .work-item.leather {
+      background-image: url('https://images.unsplash.com/photo-1644258676710-ffb99d7d7a1b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80&sat=-100');
+    }
+
+    .work-item.candles {
+      background-image: url('https://images.unsplash.com/photo-1628519750359-b55af93ea19d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80&sat=-100');
+    }
+
+    .work-item.jewellery {
+      background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80&sat=-100');
+    }
+
+    .work-item:hover {
+      border-color: #1a1a1a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .work-item h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      font-weight: normal;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .work-item h3 .category {
+      font-family: 'Helvetica Neue', 'Arial', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+    }
+
+    .work-item h3 .haus {
+      font-family: 'Lucida Handwriting', 'Apple Chancery', 'Dancing Script', cursive;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+    }
+
+    .work-item p {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .work-item .highlight {
+      font-size: 0.85rem;
+      color: #1a1a1a;
+      font-weight: 600;
+      background: #f0f0f0;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: inline-block;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .other-faff {
+      padding: 4rem 0;
+      background: #f9f9f9;
+      text-align: center;
+    }
+
+    .other-faff h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: normal;
+    }
+
+    .faff-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .faff-link {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border: 2px solid #1a1a1a;
+      color: #1a1a1a;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .faff-link .link-primary {
+      display: block;
+      font-weight: 700;
+    }
+
+    .footer-link {
+      padding: 0.2rem;
+    }
+
+    .faff-link .link-tagline {
+      display: block;
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    .faff-link:hover .link-tagline {
+      color: #ddd;
+    }
+
+    .faff-link:hover {
+      background: #1a1a1a;
+      color: #fefefe;
+    }
+
+    .coming-soon {
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid #e8e8e8;
+    }
+
+    .coming-soon h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-weight: normal;
+    }
+
+    .coming-soon p {
+      color: #666;
+      font-style: italic;
+    }
+
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+      border-top: 1px solid #e8e8e8;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+
+      .work-grid .container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .faff-links {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="logo"><span class="faff">FAFF</span>.<span class="haus">haus</span></div>
+    <div class="subtitle">A creative escape</div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>Hi, I'm Chris</h1>
+      <p class="hero-text">
+        Welcome to my collection of creative pursuits. What my wife calls "hobbies,"
+        I call faff - those moments of complete engagement where the noise quiets
+        and you become one with the craft.
+      </p>
+
+      <div class="faff-definition">
+        <p><strong>FAFF</strong> /faf/ <em>noun</em></p>
+        <p>Complete, active engagement with an activity to the point all distractions fade and you are truly at one with
+          the task.</p>
+        <small>— My personal definition (your mileage may vary)</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="work-grid">
+    <div class="container">
+      <div class="work-item leather">
+        <h3><span class="category">LEATHER</span>.<span class="haus">haus</span></h3>
+        <p>
+          High-end wallets, notebooks, folios, small bags, and key rings.
+          Each piece is crafted with attention to detail and built to last.
+          Currently, I'm exploring NFC integration for smart leather goods.
+        </p>
+        <div class="highlight">Featured: NFC-enabled designs in development</div>
+      </div>
+
+      <div class="work-item candles">
+        <h3><span class="category">CANDLE</span>.<span class="haus">haus</span></h3>
+        <p>
+          Custom scented candles in handcrafted resin containers.
+          Inspired by popular perfume scents but made uniquely mine.
+          Each vessel is as much art as it is functional.
+        </p>
+        <div class="highlight">Signature: Custom resin containers</div>
+      </div>
+
+      <div class="work-item jewellery">
+        <h3><span class="category">JEWELLERY</span>.<span class="haus">haus</span></h3>
+        <p>
+          Semi-precious bead bracelets featuring tiger's eye, onyx, jade,
+          and silver. Clean, minimal designs that complement rather than
+          compete. Some pieces might even incorporate leather elements.
+        </p>
+        <div class="highlight">Materials: Natural stones & precious metals</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="other-faff">
+    <div class="container">
+      <h2>My other faff</h2>
+      <p>
+        Beyond physical crafts, I find flow in code and cuisine.
+        Each pursuit feeds the others, creating a cycle of creative energy.
+      </p>
+        <a href="https://prog.ramm.ing" class="faff-link" target="_blank" rel="noopener">
+          <span class="link-primary">https://prog.ramm.ing</span>
+          <span class="link-tagline">'Ey? Aye, let's go</span>
+        </a>
+        <a href="https://r.eci.pe" class="faff-link" target="_blank" rel="noopener">
+          <span class="link-primary">https://r.eci.pe</span>
+          <span class="link-tagline">Well, I do like to eat...</span>
+        </a>
+        <a href="https://rufftag.com" class="faff-link" target="_blank" rel="noopener">
+          <span class="link-primary">https://rufftag.com</span>
+          <span class="link-tagline">Quite excited about this one</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="coming-soon">
+    <div class="container">
+      <h2>Portfolio Gallery</h2>
+      <p>Coming soon - a curated collection of my work across all creative pursuits</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2024 <a href="https://github.com/thekitchencoder" target="_blank" rel="noopener">TheKitchenCoder</a>. Made in
+      <a href="https://thekitchencodery.com" class="faff-link footer-link" target="_blank" rel="noopener">TheKitchenCodery</a> with focus, not faff.</p>
+  </div>
+</footer>
+</body>
+</html>
